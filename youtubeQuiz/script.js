@@ -6,7 +6,7 @@ $(document).ready(function(){
 
     var options = {
         part: 'snippet',
-        key: 'AIzaSyBBF7_kHouQt-er1grk-v4t4iU9YbFdaY8';
+        key: 'AIzaSyBBF7_kHouQt-er1grk-v4t4iU9YbFdaY8',
         maxResults: 20,
         playlistId: playlistId
     }
