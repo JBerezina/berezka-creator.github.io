@@ -31,16 +31,25 @@ body {
     margin: 0 auto;
 }
 
-header, section {
+header, section, form {
     position: fixed;
     text-align: center;
     width: 560px;
     background-color: #fff;
 }
 
+form {
+    top: 50px;
+    padding: 20px 0;
+}
+
+#search {
+    width: 400px;
+}
 
 section {
-    top: 50px;
+    top: 100px;
+   
 }
 
 .logo {
@@ -51,7 +60,7 @@ section {
 }
 
 main{
-    padding:370px 18px 10px;
+    padding:30px 38px 10px;
 }
 
 article {
