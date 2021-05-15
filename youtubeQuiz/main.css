@@ -27,7 +27,6 @@ body {
 
 .container {
     width: 560px;
-    height: 100vh;
     background-color: #fff;
     margin: 0 auto;
 }
@@ -36,6 +35,7 @@ header, section {
     position: fixed;
     text-align: center;
     width: 560px;
+    background-color: #fff;
 }
 
 
