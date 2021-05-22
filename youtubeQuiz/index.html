@@ -24,18 +24,36 @@
             <form id="form">
                 <div class="form-group">
                     <input type="text"  class="form-control" id="search" />
-                    <input type="submit" class="btn btn-danger" value="Search" />
+                    <input type="submit" class="search-btn btn-danger" value="Search" />
                 </div>
             </form>
 
-
             <section id="video">
-              </section>
+            </section>
 
-            <main id="videos">
-                
+            <section id="quiz-body" class="quiz-body hide"> <!--body-->
+                <div class="quiz-container">
+                    <div id="question-container" class="hide">
+                        <div id="question">Question</div>
+                        <div id="answer-buttons"class="btn-grid">
+                            <button class="btn">Answer 1</button>
+                            <button class="btn">Answer 1</button>
+                            <button class="btn">Answer 1</button>
+                            <button class="btn">Answer 1</button>
+                        </div>
+                    </div>
+                    <div class="controls">
+                        <button id="start-btn" class="start-btn btn">Start</button>
+                        <button id="next-btn" class="next-btn btn hide">Next</button>
+                        <button id="enjoy-btn" class="enjoy-btn btn hide">Enjoy the video</button>
+                        
+                    </div>   
+                </div>
+            </section>
 
-               
+           
+             
+            <main id="videos">  
             </main>
          
         </div>
