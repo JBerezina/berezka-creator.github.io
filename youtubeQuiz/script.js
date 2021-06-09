@@ -92,8 +92,6 @@
    
    
     }
-
-
    
     $('main').on('click', 'article', function (){
         var id = $(this).attr('data-key');
@@ -103,145 +101,148 @@
          <iframe width="560" height="315" 
          src="https://www.youtube.com/embed/${id}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display: block"></iframe>  
       `);
-        
-        
-    
-                
 
          //QUIZ CODE
 
         const quizBodyElement = document.getElementById('quiz-body')
-        quizBodyElement.classList.remove('hide')
-        const startButton = document.getElementById('start-btn')
+        //const startButton = document.getElementById('start-btn')
         const nextButton = document.getElementById('next-btn')
-        const enjoyButton = document.getElementById('enjoy-btn')
-        enjoyButton.classList.add('hide')
+       
         const questionContainerElement = document.getElementById('question-container')
         const questionElement = document.getElementById('question')
         const answerButtonsElement = document.getElementById('answer-buttons')
         let shuffledQuestions, currentQuestionIndex;
 
-        startButton.addEventListener('click', startGame)
-
         nextButton.addEventListener('click', () => {
-            currentQuestionIndex ++
-            setNextQuestion()
-        })
-
-        
-        enjoyButton.addEventListener('click', () => {
-            currentQuestionIndex ++
-           
-            setNextQuestion()
-            quizBodyElement.classList.add('hide')
-
-        })
-
-
-         function startGame(){
-
-             console.log("Start Game")
-             startButton.classList.add("hide");
-             shuffledQuestions = questions.sort(() => Math.random() - .5)
-             currentQuestionIndex=0
-             questionContainerElement.classList.remove('hide')
-            
-
-
-             setNextQuestion()
-         }
-
-         function setNextQuestion(){
-           
-            resetState()
-            showQuestion(shuffledQuestions[currentQuestionIndex])
-         }
-
-         function showQuestion(question){
-             console.log(question)
-
-            questionElement.innerText=question.question
-
-            question.answers.forEach( answer =>{
-                const button = document.createElement('button')
-                button.innerText = answer.text
-                button.classList.add('btn')
-
-                if(answer.correct){
-                    button.dataset.correct = answer.correct
-                }
-
-                button.addEventListener('click', selectAnswer)
-                answerButtonsElement.appendChild(button)
-            })
-         }
-
-         function resetState(){
-            clearStatusClass(quizBodyElement)
-             nextButton.classList.add('hide')
-             enjoyButton.classList.add('hide')
-            
-
-             while(answerButtonsElement.firstChild){
-                 answerButtonsElement.removeChild(answerButtonsElement.firstChild)
-
-             }
-         }
-
-         function selectAnswer(e){
-             const selectedButton = e.target
-             const correct = selectedButton.dataset.correct
-             
-             if(correct){
-                if(shuffledQuestions.length > currentQuestionIndex+1){
-                    enjoyButton.classList.remove('hide')
-                } else {
-
-                    startButton.innerText = "Restart"
-                    startButton.classList.remove('hide')
-            
-                }
-                
-              
-            } else {
-               
-                if(shuffledQuestions.length > currentQuestionIndex+1){
-                    nextButton.classList.remove('hide')
-                } else {
-                    startButton.innerText = "Restart"
-                    startButton.classList.remove('hide')
-            
-                }
-                
-            }
-                
+            answerButtonsElement.classList.remove('disable')
           
-            setStatusClass(quizBodyElement, correct)
+            clearStatusClass(quizBodyElement)
+            console.log(currentQuestionIndex)
+            //if it is last element of array 
+            if(currentQuestionIndex == shuffledQuestions.length-1){
+                currentQuestionIndex=0
+            }else{
+                currentQuestionIndex++
+            }
+            setNextQuestion()
 
-             Array.from(answerButtonsElement.children).forEach(button => {
-                 setStatusClass(button, button.dataset.correct)
-             })
+        })
+
+    startGame()
+
+    function startGame(){
+        answerButtonsElement.classList.remove('hide')
+        resetState()
+        clearStatusClass(quizBodyElement)
+          console.log("Start Game")
+          shuffledQuestions = questions.sort(() => Math.random() - .5)
+          currentQuestionIndex = 0
+          quizBodyElement.classList.remove('hide')
+          questionContainerElement.classList.remove('hide')
+          setNextQuestion()
+        }
+
+    function setNextQuestion(){
+          showQuestion(shuffledQuestions[currentQuestionIndex])
+      }
+
+    function showQuestion(question) {
+
+        //to reset quiz body before showing new question
+        //to set it to default state before we set a new question
+        resetState()
+     
+        questionElement.innerText = question.question
+
+
+          //loop through our answers in array to show answers buttons to choose
+
+          question.answers.forEach(answer => {
+              const button = document.createElement('button')
+              button.innerText = answer.text
+              button.classList.add('btn')
+                //if correct is true
+              if (answer.correct){
+                  button.dataset.correct = answer.correct
+
+                  
+              }
+
+            //now we have some dataset on the button that set to true
+            //if it was true, if it wasn't true, there is no dataset
+
+            button.addEventListener('click', selectAnswer)
+
+            //add this button to all our buttons
+            answerButtonsElement.appendChild(button)
+            //we need to clear this answer every time when we set next question
+           })
+      }
+
+       //this function is going to reset
+      // everything that is related to our QUIZBODY
+    function resetState(){
+
+        //wewill loop through all our children inside the answer elements
+        // and if there is any button that left after previus question,
+        // we need to remove it
+        while(answerButtonsElement.firstChild){
+            answerButtonsElement.removeChild(answerButtonsElement.firstChild)
+        }
+      }
+     
+    function selectAnswer(e){
+          //e-is selected button
+          const selectedButton = e.target
+          const correct =  selectedButton.dataset.correct
+            //we need to set atetus class of our body
+          setStatusClass(quizBodyElement, correct)
+          //than loop through all our buttons and set the class for them
+
+          Array.from(answerButtonsElement.children).forEach(button => { 
+            console.log(button.dataset.correct)
+            setStatusClass(button, button.dataset.correct)   
+          })
+            showVideo(selectedButton.dataset.correct)
+      }
+
+    function showVideo(correct){
+
+          //than we will see if it is correct
+         if(correct){
+                quizBodyElement.classList.add('hide')
+
+         } else {
+             
+                nextButton.classList.remove('hide')
+              
+
+                answerButtonsElement.classList.add('disable')
+               
          }
-        
+      }
 
-         function setStatusClass(element, correct){
-             clearStatusClass(element)
+      //this function will set just add CSS class
+      //WRONG or CORRECT classes to selected elements
+    function setStatusClass(element, correct){
+          //first we need to clear any status class that we have
+          clearStatusClass(element)
+          //than we will see if it is correct
+          if(correct){
+              element.classList.add('correct')
+          } else {
+            element.classList.add('wrong')
 
-             if(correct) {
-                 element.classList.add('correct')  
-                
-             }else {
-                 element.classList.add('wrong')
-             } 
-         }
+          }
 
-         function clearStatusClass(element){
-             element.classList.remove('correct')
-             element.classList.remove('wrong')
-         }
+      }
 
+      //this function will remove any WRONG or CORRECT CSS classes 
+    function clearStatusClass(element){
+        element.classList.remove('correct')
+        element.classList.remove('wrong')
+      }
     })
-
 })
 
 
@@ -254,17 +255,10 @@ const questions= [
         ]
     },
     {
-        question: "What is 3 + 3?",
+        question: "What is 3 + 2?",
         answers: [
-            {text: '6', correct: true},
-            {text: '33', correct: false}
-        ]
-    },
-    {
-        question: "What is 4 + 4?",
-        answers: [
-            {text: '8', correct: true},
-            {text: '44', correct: false}
+            {text: '5', correct: true},
+            {text: '32', correct: false}
         ]
     },
     {
@@ -275,12 +269,13 @@ const questions= [
         ]
     },
     {
-        question: "What is 4 + 4?",
+        question: "What is 2 + 2?",
         answers: [
-            {text: '8', correct: true},
-            {text: '44', correct: false}
+            {text: '4', correct: true},
+            {text: '22', correct: false}
         ]
     }
+
 ]
 
   
