@@ -10,7 +10,8 @@
              part: 'snippet',
              key: API_KEY,
              maxResults: 20,
-             playlistId: playlistId
+             playlistId: playlistId,
+             playerVars: {rel:0}
          }
          loadVids();
     
@@ -89,25 +90,45 @@
             })
         })
    
-   
-   
     }
+    const videoContainer = document.getElementById('video')
    
     $('main').on('click', 'article', function (){
+       
+
         var id = $(this).attr('data-key');
          
 
          $('#video').html(`
-         <iframe width="560" height="315" 
-         src="https://www.youtube.com/embed/${id}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display: block"></iframe>  
+         <iframe id="iframe" width="560" height="315"
+         src="https://www.youtube.com/embed/${id}?rel=0&enablejsapi=1"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          sandbox="allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation"
+          allowfullscreen style="display: block"></iframe>
       `);
 
+      /* trying to  access the inside of iframe
+      var iframe = document.getElementById('iframe');
+      var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+      console.log(innerDoc);
+      innerDoc.querySelectorAll('a').forEach( function (a){
+        console.log(a);
+        a.addEventListener("click", function(){ console.log("clicked on link"); });
+      });
+      */
+
+
+
+    
+     
          //QUIZ CODE
 
         const quizBodyElement = document.getElementById('quiz-body')
         //const startButton = document.getElementById('start-btn')
         const nextButton = document.getElementById('next-btn')
-       
+        const uvisibleContainer = document.getElementById('unvisible')
+        uvisibleContainer.classList.add('unvisible')
         const questionContainerElement = document.getElementById('question-container')
         const questionElement = document.getElementById('question')
         const answerButtonsElement = document.getElementById('answer-buttons')
@@ -209,17 +230,22 @@
     function showVideo(correct){
 
           //than we will see if it is correct
+
          if(correct){
+             console.log("Video is playing")
                 quizBodyElement.classList.add('hide')
+                // uvisbleContainer.classList.remove('hide')
+
+
+            
+               
 
          } else {
-             
                 nextButton.classList.remove('hide')
-              
-
-                answerButtonsElement.classList.add('disable')
-               
+                answerButtonsElement.classList.add('disable')       
          }
+       
+         console.log("AFTER ELSE")
       }
 
       //this function will set just add CSS class
@@ -243,6 +269,29 @@
         element.classList.remove('wrong')
       }
     })
+
+    /* WRONG: Cannot access elements inside iframe this way
+    $('iframe').on('click', function (event){
+
+        event.preventDefault();
+        let redirect = $(this).attr('href');
+        console.log(redirect);
+
+        $.ajax({
+            url: $(this).attr('href'),
+            success : function(data){
+                                $('#login-loader').hide();
+                                        location.reload(true);
+                            },
+                            error   : function(){
+                                $('#error-login').replaceWith('<div id="error-login" class="msg fail"><p>Une erreur a été rencontrée lors du deconnexion!</p></div>');
+                            }
+                        });
+
+
+
+    }) */
+
 })
 
 

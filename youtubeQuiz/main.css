@@ -54,6 +54,17 @@ body {
     background-color: hsl(var(--hue), 100%, 20%);
 }
 
+#unvisible{
+    position: fixed;
+   
+    width: 560px;
+    height: 260px;
+    background-color: red;
+    opacity: 0;
+   
+
+}
+
 .quiz-body.correct{
     --hue:var(--hue-correct);
 }
