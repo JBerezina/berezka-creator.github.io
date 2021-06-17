@@ -118,6 +118,12 @@ section{
     margin: 0.7rem 0;
 }
 
+.knowledge {
+    background-color: rgb(125, 204, 204);
+    height: 100%;
+  
+
+}
 .resume-work__description { 
     margin: 1rem 0 0 1rem;
 }
@@ -132,6 +138,7 @@ li {
     margin: 1rem;
     display: grid;
     grid-template-columns: 5rem auto;
+    grid-row-gap: 0.5rem;
    
 }
 
@@ -139,6 +146,7 @@ li {
     margin: 1rem;
     display: grid;
     grid-template-columns: 4rem auto; 
+    grid-row-gap: 0.5rem;
 }
 
 
