@@ -3,20 +3,27 @@
     margin:0;
     padding:0; 
 }
+html{
+    height: 100%;
+}
 
 body {
-    font-family: 'Montserrat', sans-serif;
-    margin: 0;
-  
+    font-family: 'Montserrat', sans-serif; 
+    display: grid;
+    grid-template-rows: 3.8rem auto 8rem;
+    grid-template-areas: "header"
+                          "main"
+                          "footer";
+    height: 100%;
 }
+
 main {
-    min-height: calc(100vh - 2rem - 4rem);
-    margin-top: 3.9rem;
-    
+   grid-area: main;
 }
 
 .main-header {
     width: 100%;
+    height: 3.5rem;
     position: fixed;
     top: 0;
     left: 0;
@@ -157,12 +164,15 @@ h1 {
     outline: none;
 }
 
+footer{ 
+    grid-area: footer;
+    background-color: black;
+    margin-top: 3rem;
+}
 
 @media (min-width: 40rem) {
 
-    main {
-        margin-top: 2.4rem;
-    }
+   
     .main-nav {
         display: flex;
     } 

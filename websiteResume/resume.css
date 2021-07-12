@@ -28,7 +28,7 @@
 
 .resume {
     display: grid;   
-    max-width: 70rem;
+    max-width: 60rem;
     min-height: calc(100vh - 2rem - 4rem);
     padding-top: 3.9rem;
     margin: auto;

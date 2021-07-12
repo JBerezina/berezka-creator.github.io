@@ -1,12 +1,19 @@
+section:nth-child(odd){
+    background-color: rgb(245, 245, 245);
+    width: 100%;
+}
+section {
+    padding: 1rem;
+}
 
+*{
+    border: 1px solid black;
+}
 
 /* OVERVIEW */
-
 .overview {
-    background-color: rgb(245, 245, 245);
     width: 100vw;
     min-width: 20rem;
-    padding: 1rem;
     text-align: center;
 }
 
@@ -28,88 +35,61 @@
     font-size: 1.5rem;
     color: rgb(95, 94, 94);
 }
-
     
 
 /* SOCIAL */
 .social-media {
-    padding-top: 1rem;
-    width: 70%;
-    margin: auto;
-    padding: 2rem 1rem;
+    
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .icone {
     width:2rem;
     height: 2rem;
-   
-
+    margin: 1rem 1rem;
 }
 .facebook {
     content: url(images/facebook.png);
-    
 }
 .instagram {
-    content: url(images/instagram.png);
-   
+    content: url(images/instagram.png);  
 }
 .github {
-    content: url(images/github.png);
-   
+    content: url(images/github.png); 
 }
 .twitter {
     content: url(images/twitter.png);
 }
 
-section {
-    padding: 0 1rem;
+.projects {  
+    min-width: 20rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.project {   
+    width: 15rem;
+    height: 20rem;
+    margin: 2rem;  
+}
+
+.burger-app__img {
+    background: url("images/burger-app.png") center/cover no-repeat border-box,
+    #ff1b68; 
+}
+
+.project-description{
+    background-color: black;
+    opacity: 0.8;
+    height: 20rem;
+    width: 15rem; 
 }
 
 
-section h3 {
-    font-family: "Roboto", sans-serif;
-    font-weight: bold;
-    font-size: 1.5rem;
-    margin: 1rem 0;
-    
-}
-section p {
-    font-size: 1.4rem;
-    text-align: justify;
-   
-}
-
-.project{
-    width: 90%;
-    background-color: rgb(245, 245, 245);
-    padding: 1rem 1rem;
-    margin: 1rem auto;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    border-radius: 8px;
-}
-
-.project-title {
-    padding: 1rem 0.5rem;
-    text-align: center;
-}
-
-.project-img {
-    border: 1px solid black;
-    border-radius: 8px;
-    margin: auto;
-    width: 60%;
-    height: 100px;
-}
-
-.project-tools {
-    font-size: 1.2rem;
-    font-weight: bold;
-    padding: 0.5rem 0.5rem;
-}
 
 @media (min-width: 40rem) {
 
@@ -121,7 +101,7 @@ section p {
         max-width: 50rem;
     }
 
-    .julia-photo  img{
+    .julia-photo img{
         width: 15rem;
         height: 15rem;
 
@@ -131,37 +111,26 @@ section p {
         text-align: left;
     }
 
-    .overview h1 {
-       
+    .overview h1 { 
         font-size: 4.3rem;
     }
     
     .overview h3 {
-       
-        font-size: 2.5rem;
-        
-    }
-    
-    section {
-        width: 80%;
-        margin: auto;
+        font-size: 2.5rem;  
+      
     }
 
-    
-    .projects-section {
-        display: grid;
-        grid-template-columns: 50% 50%;
-        
-    }
-    .projects-title{
-        grid-column-start: 1;
-        grid-column-end: -1;
-    }
-
+    .about-section, .projects-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:center;
+      }
+      
+      .about-section > div,
+      .projects-section > div {
+        width: 60%;
+      }
 
 
 }
-
-
-/* 
- */
