@@ -108,15 +108,7 @@
           allowfullscreen style="display: block"></iframe>
       `);
 
-      /* trying to  access the inside of iframe
-      var iframe = document.getElementById('iframe');
-      var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-      console.log(innerDoc);
-      innerDoc.querySelectorAll('a').forEach( function (a){
-        console.log(a);
-        a.addEventListener("click", function(){ console.log("clicked on link"); });
-      });
-      */
+
 
 
 
